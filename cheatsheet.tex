@@ -41,11 +41,10 @@
 
 \begin{document} 
 \begin{multicols}{2}
-[
-    \begin{center}
-        \textbf{\Large Formulário MDIO 2020/2021}
-    \end{center}
-]
+
+\begin{center}
+    \fbox{\textbf{\Large Formulário MDIO 2020/2021}}
+\end{center}
 
 \thispagestyle{empty}
 
@@ -69,7 +68,7 @@ vert (n vezes)
     \item \textbf{\texttt{dst}}: vértice de destino
     \item \textbf{\texttt{custo}}: custo de transporte
     \item \textbf{\texttt{cap}}: capacidade do arco
-    \item \textbf{\texttt{vert}}: oferta/procura no vértice, positivo e negativo respetivamente
+    \item \textbf{\texttt{vert}}: oferta/procura no vértice, \(+\) e \(-\) respetivamente
 \end{itemize}
 
 
@@ -92,7 +91,7 @@ A uma base podemos associar uma árvore (grafo com vértices não orientados) qu
 \begin{itemize}
     \item é um grafo ligado (existe um caminho entre cada par de vértices)
     \item sem ciclos
-    \item com \(|A| = |V| - 1\) (número de arcos = número de vértices - 1)
+    \item com \(|A| = |V| - 1\) (nº de arcos = nº de vértices - 1)
 \end{itemize}
 
 \subsection{Método dos multiplicadores}
@@ -114,14 +113,14 @@ A uma base podemos associar uma árvore (grafo com vértices não orientados) qu
 
 \section{Transportes: Grafos Bipartidos}
 
-Um grafo \(G = (V, A)\) é bipartido se o conjunto de vértices \(V\) puder ser dividido em dois conjuntos disjuntos, \(V_1\) e \(V_2\) (i.e., \(V1 \cup V2 = V,V1 \cap V2 = \emptyset\)), de tal modo que todos os arcos \((i,j) \in A\) tenham origem num vértice \(i \in V_1\) e destino num vértice \(j \in V_2\).
+Um grafo \(G = (V, A)\) é bipartido se o conjunto de vértices \(V\) puder ser dividido em dois conjuntos disjuntos, \(V_1\) e \(V_2\) (i.e., \(V_1 \cup V_2 = V, V_1 \cap V_2 = \emptyset\)), de tal modo que todos os arcos \((i,j) \in A\) tenham origem num vértice \(i \in V_1\) e destino num vértice \(j \in V_2\).
 
-\subsection{Representações}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.45\textwidth]{bipartidos_repr.png}
-\end{figure}
+%\subsection{Representações}
+%
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.45\textwidth]{bipartidos_repr.png}
+%\end{figure}
 
 \subsection{Solução inicial}
 
@@ -167,11 +166,15 @@ Um grafo \(G = (V, A)\) é bipartido se o conjunto de vértices \(V\) puder ser 
 
 
 
-\section{Transportes: Redes sem capacidades}
+%\section{Transportes: Redes sem capacidades}
 
-\dots (nada?)
+%\dots (nada?)
 
-\section{Transportes: Redes com capacidades}
+
+
+
+\section{Transportes: Redes c/ capacidades}
+
 
 \subsection{Caracterização das soluções básicas}
 
@@ -200,7 +203,9 @@ Uma variável não-básica é atrativa quando:
 \end{figure}
 
 
+
 \section{Programação Inteira: Modelos}
+\thispagestyle{empty}
 
 \subsection{Expressões lógicas}
 
@@ -210,12 +215,71 @@ Uma variável não-básica é atrativa quando:
 \end{figure}
 
 
-\section{Programação Inteira: Planos de corte}
+\section{PI: Planos de corte}
 
-\dots
+Estratégia do método dos planos de corte:
+\begin{enumerate}
+    \item determinar a solução óptima do problema de PL
+    \item cortar partes do domínio em que não há sol. inteiras e reoptimizar, até obter uma sol. inteira (que é óptima!)
+\end{enumerate}
 
-\section{Programação Inteira: Partição e avaliação}
+\vspace{0.25cm}
 
+Algoritmo de planos de corte:
+\begin{enumerate}
+    \item Optimizar \textit{relaxação linear}
+    \item Enquanto a solução não for inteira:
+    \begin{itemize}
+        \item identificar um plano de corte
+        \item adicionar plano de corte ao conjunto de restrições
+        \item reoptimizar (usando o método simplex dual)
+    \end{itemize}
+\end{enumerate}
+
+
+
+\section{PI: Partição e avaliação}
+
+\subsection{Partição do domínio}
+
+Dado um pai com uma solução fraccionária:
+\begin{enumerate}
+    \item selecionar variável \(x_j\) fraccionária
+    \item criar 2 nós filhos, \(x_j \le \lfloor x_j \rfloor\) e \(x_j \ge \lceil x_j \rceil \)
+\end{enumerate}
+
+\subsection{Solução incumbente}
+
+É a melhor solução inteira encontrada até um dado passo da pesquisa (\(x_\textsf{SI}\)) com valor de função objectivo \(z_\textsf{SI}\).
+
+\subsection{Avaliação do nó (prob. maximização)}
+
+\subsubsection{[Início] Determinar sol. ótima PL (\(x_\textsf{PL} \rightarrow z_\textsf{PL}\))}
+
+\begin{itemize}
+    \item se for inteira, é a melhor sol. inteira no domínio do nó
+    \item se não, pode haver na subárvore uma sol. inteira \(\le z_\textsf{PL}\)
+\end{itemize}
+
+\subsubsection{[Opção 1] Abandonar o nó (podar a subárvore) se:}
+
+\begin{itemize}
+    \item o problema for impossível (domínio vazio)
+    \item a solução \(x_\textsf{PL}\) for inteira (atualizar incumbente se \(z_\textsf{PL} > z_\textsf{SI}\))
+    \item a solução \(x_\textsf{PL}\) for fraccionária e não puder haver na subárvore uma solução inteira melhor do que a solução incumbente \(z_\textsf{PL} \le z_\textsf{SI}\)
+\end{itemize}
+
+\subsubsection{[Opção 2] Fazer partição (explorar a subárvore):}
+
+\begin{itemize}
+    \item se a solução \(x_\textsf{PL}\) for fraccionária e ainda puder haver na subárvore uma solução inteira melhor do que a solução incumbente \(z_\textsf{PL} > z_\textsf{SI}\)
+\end{itemize}
+
+\subsection{Limites inf. e sup. para o valor do ótimo}
+
+\(z_I^* \rightarrow\) solução ótima inteira
+
+\[z_I^* \in [\textsf{LI}, \textsf{LS}]\]
 
 
 \end{multicols}
