@@ -1,0 +1,222 @@
+\documentclass[10pt, a4paper]{article}
+
+%\usepackage[margin=2.5cm,nohead]{geometry}
+%\renewcommand{\baselinestretch}{1.2} % mudar o espaçamento entre linhas
+\usepackage[portuguese]{babel}
+\usepackage{indentfirst}
+\usepackage[utopia]{mathdesign}     % fonte Utopia para o documento inteiro
+\usepackage{inconsolata}            % fonte mono-espaçada
+\usepackage[stretch=10]{microtype}  % ajuste de espaçamento entre caracteres
+\usepackage{hyperref}               % referências clicáveis
+\usepackage{float}                  % posicionamento de figuras
+\usepackage{lastpage}               % colocar última página no rodapé
+%\usepackage{enumitem}               % modificar listagens
+\usepackage{amsmath}                % escrita matemática
+\usepackage[extreme]{savetrees}     % aproveitar espaço em branco
+
+
+\usepackage{multicol}               % múltiplas colunas
+\setlength{\columnsep}{1cm}
+
+\usepackage{xcolor}     % mudar a cor do texto
+\definecolor{uminho}{RGB}{150, 33, 24}
+\definecolor{um_eng}{RGB}{173, 66, 15}
+
+\usepackage{graphicx}     % inserir imagens
+\graphicspath{{images/}}  % pasta das imagens
+
+\usepackage{sectsty}          % personalizar capítulos/secções
+\chapterfont{\color{uminho}}  % mudar cor dos capítulos
+\sectionfont{\color{uminho}}  % mudar cor das secções
+ 
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true,keywordstyle=\color{um_eng}}
+
+%\usepackage{todonotes}              % lista de to-dos
+%\setlength{\marginparwidth}{2.5cm}  % tamanho das margens (para to-dos)
+
+\setlength{\parskip}{0.2em}         % espaçamento entre parágrafos
+
+
+
+\begin{document} 
+\begin{multicols}{2}
+[
+    \begin{center}
+        \textbf{\Large Formulário MDIO 2020/2021}
+    \end{center}
+]
+
+\thispagestyle{empty}
+
+
+
+\section{\texttt{Relax4}}
+
+\subsection{Formato do input}
+
+\begin{lstlisting}
+n
+m
+org dst custo cap (m vezes)
+vert (n vezes)
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textbf{\texttt{n}}: número de vértices
+    \item \textbf{\texttt{m}}: número de arcos do grafo
+    \item \textbf{\texttt{org}}: vértice de origem do arco
+    \item \textbf{\texttt{dst}}: vértice de destino
+    \item \textbf{\texttt{custo}}: custo de transporte
+    \item \textbf{\texttt{cap}}: capacidade do arco
+    \item \textbf{\texttt{vert}}: oferta/procura no vértice, positivo e negativo respetivamente
+\end{itemize}
+
+
+
+\section{Transportes: Introdução}
+
+\subsection{Modelo geral}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{modelo_geral_transportes.png}
+\end{figure}
+
+\subsection{Caracterização das soluções básicas}
+
+A uma base podemos associar uma árvore (grafo com vértices não orientados) que suporta todos os vértices.
+
+\subsubsection{Propriedades da árvore de suporte de um grafo G = (V, A)}
+
+\begin{itemize}
+    \item é um grafo ligado (existe um caminho entre cada par de vértices)
+    \item sem ciclos
+    \item com \(|A| = |V| - 1\) (número de arcos = número de vértices - 1)
+\end{itemize}
+
+\subsection{Método dos multiplicadores}
+
+\begin{enumerate}
+    \item Fixar o valor de qualquer multiplicador em 0
+    \item Arcos básicos: \(c_{ij} = u_i - u_j\)
+    \item Arcos não-básicos: $\delta_{ij} = c_{ij} - (u_i - u_j)$
+\end{enumerate}
+
+\subsection{Pivô}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.35\textwidth]{pivo_intr.png}
+\end{figure}
+
+
+
+\section{Transportes: Grafos Bipartidos}
+
+Um grafo \(G = (V, A)\) é bipartido se o conjunto de vértices \(V\) puder ser dividido em dois conjuntos disjuntos, \(V_1\) e \(V_2\) (i.e., \(V1 \cup V2 = V,V1 \cap V2 = \emptyset\)), de tal modo que todos os arcos \((i,j) \in A\) tenham origem num vértice \(i \in V_1\) e destino num vértice \(j \in V_2\).
+
+\subsection{Representações}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{bipartidos_repr.png}
+\end{figure}
+
+\subsection{Solução inicial}
+
+\subsubsection{Método do canto NW}
+
+\begin{enumerate}
+    \item Colocar a maior quantidade possível na casa mais a NW \(\implies\)
+    \begin{itemize}
+        \item ou a procura de um destino (coluna) é totalmente satisfeita,
+        \item ou a oferta de uma origem (linha) é totalmente usada,
+        \item ou ambas.
+    \end{itemize}
+    \item Cortar a linha ou a coluna (ou ambas)
+    \item Repetir se ainda houver uma casa
+\end{enumerate}
+
+\subsubsection{Método do canto NW}
+
+\begin{enumerate}
+    \item Colocar a maior quantidade possível na casa com custo mínimo \(\implies\)
+    \begin{itemize}
+        \item ou a procura de um destino (coluna) é totalmente satisfeita,
+        \item ou a oferta de uma origem (linha) é totalmente usada,
+        \item ou ambas.
+    \end{itemize}
+    \item Cortar a linha ou a coluna (ou ambas)
+    \item Repetir se ainda houver uma casa
+\end{enumerate}
+
+\subsubsection{Seleção da variável básica com valor 0 (quando faltar uma var. básica)}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{var_basica_0.png}
+\end{figure}
+
+\subsection{Pivô}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{bipartidos_pivo.png}
+\end{figure}
+
+
+
+\section{Transportes: Redes sem capacidades}
+
+\dots (nada?)
+
+\section{Transportes: Redes com capacidades}
+
+\subsection{Caracterização das soluções básicas}
+
+Iguais às referidas no 2.2, mas agora as variáveis no limite superior são também consideradas como não-básicas, para além das iguais a 0.
+
+Uma variável não-básica é atrativa quando:
+\begin{itemize}
+    \item \(x_{ij} = 0\) (variável aumenta de valor) e \(\delta_{ij} < 0\)
+    \item \(x_{ij} = u_{ij}\) (variável decrementa de valor) e \(\delta_{ij} > 0\)
+\end{itemize}
+
+\subsection{Transformações}
+
+\subsubsection{Capacidade num vértice}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{cap_vertice.png}
+\end{figure}
+
+\subsubsection{Limite inferior num arco}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{limites.png}
+\end{figure}
+
+
+\section{Programação Inteira: Modelos}
+
+\subsection{Expressões lógicas}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{expr_logicas.png}
+\end{figure}
+
+
+\section{Programação Inteira: Planos de corte}
+
+\dots
+
+\section{Programação Inteira: Partição e avaliação}
+
+
+
+\end{multicols}
+\end{document}
