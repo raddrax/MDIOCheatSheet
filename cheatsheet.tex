@@ -223,8 +223,6 @@ Estratégia do método dos planos de corte:
     \item cortar partes do domínio em que não há sol. inteiras e reoptimizar, até obter uma sol. inteira (que é óptima!)
 \end{enumerate}
 
-\vspace{0.25cm}
-
 Algoritmo de planos de corte:
 \begin{enumerate}
     \item Optimizar \textit{relaxação linear}
@@ -275,12 +273,24 @@ Dado um pai com uma solução fraccionária:
     \item se a solução \(x_\textsf{PL}\) for fraccionária e ainda puder haver na subárvore uma solução inteira melhor do que a solução incumbente \(z_\textsf{PL} > z_\textsf{SI}\)
 \end{itemize}
 
-\subsection{Limites inf. e sup. para o valor do ótimo}
+\subsection{Limites para o valor do ótimo}
 
-\(z_I^* \rightarrow\) solução ótima inteira
+\(z_I^* \in [\textsf{LI}, \textsf{LS}]\), \(z_I^* \rightarrow\) solução ótima inteira
 
-\[z_I^* \in [\textsf{LI}, \textsf{LS}]\]
+\subsection{Limite superior}
 
+Num problema de maximização o LS é apenas um valor de referência, não está associado a nenhuma solução inteira admissível. O valor do ótimo da relaxação linear (\(z_\textsf{RL}\)) é um limite superior para o valor do ótimo inteiro \(z_I^*\):
+\[z_I^* \le z_\textsf{RL}\]
+
+\vspace{0.25cm}
+
+Para problemas de minimização é o oposto (lim. inferior).
+
+\subsection{Limite inferior}
+
+O valor de qualquer solução inteira admissível é um limite inferior para \(z_I^*\). 
+
+Para problemas de minimização é o oposto (lim. superior).
 
 \end{multicols}
 \end{document}
