@@ -1,43 +1,34 @@
 \documentclass[10pt, a4paper]{article}
 
-%\usepackage[margin=2.5cm,nohead]{geometry}
-%\renewcommand{\baselinestretch}{1.2} % mudar o espaçamento entre linhas
-\usepackage[portuguese]{babel}
-\usepackage{indentfirst}
+\usepackage[portuguese]{babel}      % ativar português no documento
+\usepackage{indentfirst}            % indentar 1º parágrafo
 \usepackage[utopia]{mathdesign}     % fonte Utopia para o documento inteiro
 \usepackage{inconsolata}            % fonte mono-espaçada
 \usepackage[stretch=10]{microtype}  % ajuste de espaçamento entre caracteres
-\usepackage{hyperref}               % referências clicáveis
 \usepackage{float}                  % posicionamento de figuras
-\usepackage{lastpage}               % colocar última página no rodapé
-%\usepackage{enumitem}               % modificar listagens
 \usepackage{amsmath}                % escrita matemática
 \usepackage[extreme]{savetrees}     % aproveitar espaço em branco
 
-
 \usepackage{multicol}               % múltiplas colunas
-\setlength{\columnsep}{1cm}
+\setlength{\columnsep}{1cm}         % separação entre colunas
 
-\usepackage{xcolor}     % mudar a cor do texto
+\usepackage{xcolor}                 % mudar a cor do texto
 \definecolor{uminho}{RGB}{150, 33, 24}
 \definecolor{um_eng}{RGB}{173, 66, 15}
 
-\usepackage{graphicx}     % inserir imagens
-\graphicspath{{images/}}  % pasta das imagens
+\usepackage{graphicx}               % inserir imagens
+\graphicspath{{images/}}            % pasta das imagens
 
-\usepackage{sectsty}          % personalizar capítulos/secções
-\chapterfont{\color{uminho}}  % mudar cor dos capítulos
-\sectionfont{\color{uminho}}  % mudar cor das secções
+\usepackage{sectsty}                % personalizar capítulos/secções
+\chapterfont{\color{uminho}}        % mudar cor dos capítulos
+\sectionfont{\color{uminho}}        % mudar cor das secções
  
-\usepackage{listings}
+\usepackage{listings}               % inserir código
 \lstset{basicstyle=\footnotesize\ttfamily,breaklines=true,keywordstyle=\color{um_eng}}
-
-%\usepackage{todonotes}              % lista de to-dos
-%\setlength{\marginparwidth}{2.5cm}  % tamanho das margens (para to-dos)
 
 \setlength{\parskip}{0.2em}         % espaçamento entre parágrafos
 
-
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
 \begin{document} 
 \begin{multicols}{2}
@@ -172,9 +163,7 @@ Um grafo \(G = (V, A)\) é bipartido se o conjunto de vértices \(V\) puder ser 
 
 
 
-
 \section{Transportes: Redes c/ capacidades}
-
 
 \subsection{Caracterização das soluções básicas}
 
