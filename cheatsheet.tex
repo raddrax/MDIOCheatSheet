@@ -219,18 +219,18 @@ Uma variável não-básica é atrativa quando:
 
 Estratégia do método dos planos de corte:
 \begin{enumerate}
-    \item determinar a solução óptima do problema de PL
-    \item cortar partes do domínio em que não há sol. inteiras e reoptimizar, até obter uma sol. inteira (que é óptima!)
+    \item determinar a solução ótima do problema de PL
+    \item cortar partes do domínio em que não há sol. inteiras e reotimizar, até obter uma sol. inteira (que é ótima!)
 \end{enumerate}
 
 Algoritmo de planos de corte:
 \begin{enumerate}
-    \item Optimizar \textit{relaxação linear}
+    \item Otimizar \textit{relaxação linear}
     \item Enquanto a solução não for inteira:
     \begin{itemize}
         \item identificar um plano de corte
         \item adicionar plano de corte ao conjunto de restrições
-        \item reoptimizar (usando o método simplex dual)
+        \item reotimizar (usando o método simplex dual)
     \end{itemize}
 \end{enumerate}
 
@@ -240,15 +240,15 @@ Algoritmo de planos de corte:
 
 \subsection{Partição do domínio}
 
-Dado um pai com uma solução fraccionária:
+Dado um pai com uma solução fracionária:
 \begin{enumerate}
-    \item selecionar variável \(x_j\) fraccionária
+    \item selecionar variável \(x_j\) fracionária
     \item criar 2 nós filhos, \(x_j \le \lfloor x_j \rfloor\) e \(x_j \ge \lceil x_j \rceil \)
 \end{enumerate}
 
 \subsection{Solução incumbente}
 
-É a melhor solução inteira encontrada até um dado passo da pesquisa (\(x_\textsf{SI}\)) com valor de função objectivo \(z_\textsf{SI}\).
+É a melhor solução inteira encontrada até um dado passo da pesquisa (\(x_\textsf{SI}\)) com valor de função objetivo \(z_\textsf{SI}\).
 
 \subsection{Avaliação do nó (prob. maximização)}
 
@@ -264,13 +264,13 @@ Dado um pai com uma solução fraccionária:
 \begin{itemize}
     \item o problema for impossível (domínio vazio)
     \item a solução \(x_\textsf{PL}\) for inteira (atualizar incumbente se \(z_\textsf{PL} > z_\textsf{SI}\))
-    \item a solução \(x_\textsf{PL}\) for fraccionária e não puder haver na subárvore uma solução inteira melhor do que a solução incumbente \(z_\textsf{PL} \le z_\textsf{SI}\)
+    \item a solução \(x_\textsf{PL}\) for fracionária e não puder haver na subárvore uma solução inteira melhor do que a solução incumbente \(z_\textsf{PL} \le z_\textsf{SI}\)
 \end{itemize}
 
 \subsubsection{[Opção 2] Fazer partição (explorar a subárvore):}
 
 \begin{itemize}
-    \item se a solução \(x_\textsf{PL}\) for fraccionária e ainda puder haver na subárvore uma solução inteira melhor do que a solução incumbente \(z_\textsf{PL} > z_\textsf{SI}\)
+    \item se a solução \(x_\textsf{PL}\) for fracionária e ainda puder haver na subárvore uma solução inteira melhor do que a solução incumbente \(z_\textsf{PL} > z_\textsf{SI}\)
 \end{itemize}
 
 \subsection{Limites para o valor do ótimo}
