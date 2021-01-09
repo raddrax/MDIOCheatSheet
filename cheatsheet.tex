@@ -66,12 +66,12 @@ vert (n vezes)
 
 \section{Transportes: Introdução}
 
-\subsection{Modelo geral}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.45\textwidth]{modelo_geral_transportes.png}
-\end{figure}
+%\subsection{Modelo geral}
+%
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.45\textwidth]{modelo_geral_transportes.png}
+%\end{figure}
 
 \subsection{Caracterização das soluções básicas}
 
@@ -206,13 +206,14 @@ Uma variável não-básica é atrativa quando:
 
 \section{PI: Planos de corte}
 
-Estratégia do método dos planos de corte:
-\begin{enumerate}
-    \item determinar a solução ótima do problema de PL
-    \item cortar partes do domínio em que não há sol. inteiras e reotimizar, até obter uma sol. inteira (que é ótima!)
-\end{enumerate}
+%Estratégia do método dos planos de corte:
+%\begin{enumerate}
+%    \item determinar a solução ótima do problema de PL
+%    \item cortar partes do domínio em que não há sol. inteiras e reotimizar, até obter uma sol. inteira (que é ótima!)
+%\end{enumerate}
 
-Algoritmo de planos de corte:
+\subsection{Algoritmo de planos de corte}
+
 \begin{enumerate}
     \item Otimizar \textit{relaxação linear}
     \item Enquanto a solução não for inteira:
@@ -222,6 +223,26 @@ Algoritmo de planos de corte:
         \item reotimizar (usando o método simplex dual)
     \end{itemize}
 \end{enumerate}
+
+\subsection{Plano de corte de Chvátal-Gomory}
+
+\begin{enumerate}
+    \item Pegar na restrição da var. básica com a maior mantissa
+    \item Pegar na parte fracionária da restrição e meter \(\ge\)
+    \item Inverter de modo a ficar com \(\le\)
+    \item Introduzir var. de folga de modo a ficar com \(=\)
+\end{enumerate}
+
+\subsubsection{Exemplo}
+
+\begin{enumerate}
+    \item \[ x_1 + \frac{1}{4}s_1 + \frac{3}{2} s_2 = \frac{5}{2} \]
+    \item \[ \frac{1}{4}s_1 + \frac{1}{2} s_2 \ge \frac{1}{2} \]
+    \item \[ - \frac{1}{4}s_1 - \frac{1}{2} s_2 \le - \frac{1}{2} \]
+    \item \[ - \frac{1}{4}s_1 - \frac{1}{2} s_2 + s_3 = - \frac{1}{2} \]
+\end{enumerate}
+
+
 
 
 
