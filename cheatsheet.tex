@@ -41,9 +41,29 @@
 
 
 
-\section{\texttt{Relax4}}
+\section{PL: Definição matricial}
 
-\subsection{Formato do input}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{quadro_simplex.png}
+\end{figure}
+
+
+
+\section{PL: Simplex Dual (prob. min)}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{simplex_dual.png}
+\end{figure}
+
+\subsection{Problema impossível}
+
+Um problema (primal) é impossível se existir uma linha com um coeficiente negativo do lado direito e com todos os coeficientes das variáveis não-básicas não-negativos (\(\ge\) 0).
+
+
+
+\section{\texttt{Relax4}}
 
 \begin{lstlisting}
 n
@@ -93,12 +113,12 @@ A uma base podemos associar uma árvore (grafo com vértices não orientados) qu
     \item Arcos não-básicos: $\delta_{ij} = c_{ij} - (u_i - u_j)$
 \end{enumerate}
 
-\subsection{Pivô}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.35\textwidth]{pivo_intr.png}
-\end{figure}
+%\subsection{Pivô}
+%
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.35\textwidth]{pivo_intr.png}
+%\end{figure}
 
 
 
@@ -115,23 +135,10 @@ Um grafo \(G = (V, A)\) é bipartido se o conjunto de vértices \(V\) puder ser 
 
 \subsection{Solução inicial}
 
-\subsubsection{Método do canto NW}
+\subsubsection{Método do canto NW / custo mínimo}
 
 \begin{enumerate}
-    \item Colocar a maior quantidade possível na casa mais a NW \(\implies\)
-    \begin{itemize}
-        \item ou a procura de um destino (coluna) é totalmente satisfeita,
-        \item ou a oferta de uma origem (linha) é totalmente usada,
-        \item ou ambas.
-    \end{itemize}
-    \item Cortar a linha ou a coluna (ou ambas)
-    \item Repetir se ainda houver uma casa
-\end{enumerate}
-
-\subsubsection{Método do custo mínimo}
-
-\begin{enumerate}
-    \item Colocar a maior quantidade possível na casa com custo mínimo \(\implies\)
+    \item Colocar a maior quantidade possível na casa mais a NW / com custo mínimo\(\implies\)
     \begin{itemize}
         \item ou a procura de um destino (coluna) é totalmente satisfeita,
         \item ou a oferta de uma origem (linha) é totalmente usada,
@@ -148,12 +155,12 @@ Um grafo \(G = (V, A)\) é bipartido se o conjunto de vértices \(V\) puder ser 
     \includegraphics[width=0.45\textwidth]{var_basica_0.png}
 \end{figure}
 
-\subsection{Pivô}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.45\textwidth]{bipartidos_pivo.png}
-\end{figure}
+%\subsection{Pivô}
+%
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.45\textwidth]{bipartidos_pivo.png}
+%\end{figure}
 
 
 
@@ -203,6 +210,14 @@ Uma variável não-básica é atrativa quando:
     \includegraphics[width=0.45\textwidth]{expr_logicas.png}
 \end{figure}
 
+\subsection{Restrições ativas e redundantes}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{restricao_ativa.png}
+\end{figure}
+
+
 
 \section{PI: Planos de corte}
 
@@ -231,24 +246,12 @@ Uma variável não-básica é atrativa quando:
     \item Pegar na parte fracionária da restrição e meter \(\ge\)
 \end{enumerate}
 
-\vspace{3mm}
-
-Para inserir na tabela simplex:
-\begin{enumerate}
-    \item Inverter de modo a ficar com \(\le\)
-    \item Introduzir var. de folga de modo a ficar com \(=\)
-\end{enumerate}
-
 \subsubsection{Exemplo}
 
 \begin{enumerate}
     \item \[ x_1 + \frac{1}{4}s_1 + \frac{3}{2} s_2 = \frac{5}{2} \]
     \item \[ \frac{1}{4}s_1 + \frac{1}{2} s_2 \ge \frac{1}{2} \]
-    \item \[ - \frac{1}{4}s_1 - \frac{1}{2} s_2 \le - \frac{1}{2} \]
-    \item \[ - \frac{1}{4}s_1 - \frac{1}{2} s_2 + s_3 = - \frac{1}{2} \]
 \end{enumerate}
-
-
 
 
 
